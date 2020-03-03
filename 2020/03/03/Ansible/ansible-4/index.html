@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
+    <meta name="keywords" content="Ansible-roles, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | Hexo</title>
+    <title>Ansible-roles | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -303,12 +303,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Ansible-roles</h1>
                 </div>
             </div>
         </div>
@@ -454,16 +454,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h5 id="Ansible-Roles"><a href="#Ansible-Roles" class="headerlink" title="Ansible-Roles"></a>Ansible-Roles</h5><h6 id="介绍："><a href="#介绍：" class="headerlink" title="介绍："></a>介绍：</h6><blockquote>
+<p><code>ansible</code>自<code>1.2</code>版本引入的新特性，用于层次性、结构化地组织<code>playbook</code>。<code>roles</code>能够根据层次型结构自动装载变量文件、<code>tasks</code>以及<code>handlers</code>等。要使用<code>roles</code>只需要在<code>playbook</code>中使用<code>include</code>指令引入即可。简单来讲，<code>roles</code>就是通过分别将变量、文件、任务、模板及处理器放置于单独的目录中，并可以便捷的<code>include</code>它们的一种机制。角色一般用于基于主机构建服务的场景中，但也可以是用于构建守护进程等场景中。主要使用场景代码复用度较高的情况下。</p>
+</blockquote>
+<h6 id="Roles目录结构："><a href="#Roles目录结构：" class="headerlink" title="Roles目录结构："></a>Roles目录结构：</h6><p><img src="https://img2018.cnblogs.com/blog/1210730/201906/1210730-20190604093514442-703615703.png" alt=""></p>
+<pre><code>roles:          &lt;--所有的角色必须放在roles目录下，这个目录可以自定义位置，默认的位置在/etc/ansible/roles
+  project:      &lt;---具体的角色项目名称，比如nginx、tomcat、php
+    files：     &lt;--用来存放由copy模块或script模块调用的文件。
+    templates： &lt;--用来存放jinjia2模板，template模块会自动在此目录中寻找jinjia2模板文件。
+    tasks：     &lt;--此目录应当包含一个main.yml文件，用于定义此角色的任务列表，此文件可以使用include包含其它的位于此目录的task文件。
+      main.yml
+    handlers：  &lt;--此目录应当包含一个main.yml文件，用于定义此角色中触发条件时执行的动作。
+      main.yml
+    vars：      &lt;--此目录应当包含一个main.yml文件，用于定义此角色用到的变量。
+      main.yml
+    defaults：  &lt;--此目录应当包含一个main.yml文件，用于为当前角色设定默认变量。
+      main.yml
+    meta：      &lt;--此目录应当包含一个main.yml文件，用于定义此角色的特殊设定及其依赖关系。
+      main.yml</code></pre><h6 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h6><p>编写一个nginx角色</p>
+<pre><code>[root@ansible ansible]# tree roles/
+roles/
+└── nginx
+    ├── tasks
+    │   ├── install.yml
+    │   ├── main.yml
+    │   ├── start.yml
+    │   └── temp.yml
+    └── templates
+        └── nginx.conf.j2</code></pre><p>roles/nginx/tasks/main.yml文件内容</p>
+<pre><code>[root@ansible ansible]# cat roles/nginx/tasks/main.yml 
+- include: install.yml
+- include: temp.yml
+- include: start.yml </code></pre><p>在roles角色文件夹同级目录编写主yml文件</p>
+<pre><code>[root@ansible ansible]# cat nginx.yml 
+---
+- hosts: web
+  remote_user: root
+  roles:
+    - role: nginx
 
+### - { role: nginx, tags: [&#39;web&#39; ,&#39;nginx&#39;]}
+    - { role: httpd, tags: [&#39;web&#39; ,&#39;httpd&#39;],when ansible_distribution_major_version == &quot;7&quot;} </code></pre>
             </div>
             <hr/>
 
@@ -488,7 +519,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xxbk.cc/2020/03/03/hello-world/">http://xxbk.cc/2020/03/03/hello-world/</a>
+                    <a href="http://xxbk.cc/2020/03/03/Ansible/ansible-4/">http://xxbk.cc/2020/03/03/Ansible/ansible-4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -693,22 +724,27 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/03/Ansible/ansible-1/">
+                <a href="/2020/03/03/Mysql/mysql/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ansible部署安装及配置">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Mysql">
                         
-                        <span class="card-title">ansible部署安装及配置</span>
+                        <span class="card-title">Mysql</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ansible架构图：
-ansible主要模块：
-HostInventory：记录由Ansible管理的主机信息，包括端口、密码、ip等。
-Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中，定义主机需要调用哪些模块来完
+                            
+
+
+mysql主从复制:  立即查看
+
+
+
+
+
                         
                     </div>
                     <div class="publish-info">
@@ -730,22 +766,25 @@ Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中�
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/03/hello-world/">
+                <a href="/2020/03/03/Ansible/ansible-3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Ansible playbook">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Ansible playbook</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            Ansible 命令工具Ansible-galaxy
+
+Ansible Galaxy 是一个免费共享和下载 Ansible 角色的网站，可以帮助我们更好的定义和学习roles。
+ansible-galaxy命令默认与 https://gal
                         
                     </div>
                     <div class="publish-info">
@@ -760,7 +799,6 @@ Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中�
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

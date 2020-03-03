@@ -1,0 +1,2125 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ansible常用模块, Hexo">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ansible常用模块 | Hexo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ansible常用模块</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-03
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="目录索引"><a href="#目录索引" class="headerlink" title="目录索引"></a>目录索引</h4><ul>
+<li><a href="#ping">ping模块</a></li>
+<li><a href="#command">command模块</a></li>
+<li><a href="#shell">shell模块</a></li>
+<li><a href="#script">script模块</a></li>
+<li><a href="#copy">copy模块</a></li>
+<li><a href="#fetch">fetch模块</a></li>
+<li><a href="#file">file模块</a></li>
+<li><a href="#cron">cron模块</a></li>
+<li><a href="#yum">yum模块</a></li>
+<li><a href="#service">service模块</a></li>
+<li><a href="#user">user模块</a></li>
+<li><a href="#group">group模块</a></li>
+<li><a href="#setup">setup模块</a></li>
+<li><a href="#replace">replace模块</a></li>
+</ul>
+<h5 id="Ansible-ping-模块"><a href="#Ansible-ping-模块" class="headerlink" title=" Ansible ping 模块"></a><a id="ping"> Ansible ping 模块</a></h5><blockquote>
+<p>Ansible最基础的模块是ping模块，主要用于判断远程客户端是否在线，用于ping本身服务器，返回值是changed、ping<br>成功结果返回 “ping”: “pong”</p>
+</blockquote>
+<pre><code>    [root@192 ~]# ansible all -m ping 
+    192.168.1.20 | SUCCESS =&gt; {
+        &quot;ansible_facts&quot;: {
+            &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+        }, 
+        &quot;changed&quot;: false, 
+        &quot;ping&quot;: &quot;pong&quot;
+    }
+    192.168.1.30 | SUCCESS =&gt; {
+        &quot;ansible_facts&quot;: {
+            &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+        }, 
+        &quot;changed&quot;: false, 
+        &quot;ping&quot;: &quot;pong&quot;
+    }
+</code></pre><h5 id="Ansible-command模块"><a href="#Ansible-command模块" class="headerlink" title="Ansible command模块"></a><a id="command">Ansible command模块</a></h5><blockquote>
+<p>Ansible command模块是Ansible默认模块，主要用于执行Linux基础命令，可以执行远程服务器命令执行、任务执行等操作。<br>但command模块不支持变量、重定向、管道符等，这些操作需要用shell模块执行</p>
+</blockquote>
+<h6 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h6><ul>
+<li>chdir：执行命令前，切换到目录</li>
+<li>creates：当该文件存在时，不执行该步骤</li>
+<li>executable：切换shell来执行命令，需要使用命令的绝对路径</li>
+<li>free_from：需要执行的脚本,一般使用Ansible的-a参数代替。</li>
+<li>removes：当该文件不存在时，不执行该步骤</li>
+<li>warn：如果在ansible.cfg中存在告警，如果设定了false，不会告警该行</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><p>chdir</p>
+<pre><code>  [root@192 ~]# ansible all -a &quot;chdir=/mnt pwd&quot;
+  192.168.1.20 | CHANGED | rc=0 &gt;&gt;
+  /mnt
+
+  192.168.1.30 | CHANGED | rc=0 &gt;&gt;
+  /mnt</code></pre></li>
+<li><p>creates</p>
+<pre><code>  [root@192 ~]# ansible all -a &quot;creates=/root/a.txt touch a.txt&quot;
+  192.168.1.20 | SUCCESS | rc=0 &gt;&gt;
+  skipped, since /root/a.txt exists ##已经存在
+
+  192.168.1.30 | CHANGED | rc=0 &gt;&gt;
+
+  [root@192 ~]# ansible all -a &quot;ls /root&quot;
+  192.168.1.20 | CHANGED | rc=0 &gt;&gt;
+  anaconda-ks.cfg
+  a.txt
+
+  192.168.1.30 | CHANGED | rc=0 &gt;&gt;
+  anaconda-ks.cfg
+  a.txt</code></pre></li>
+</ul>
+<h5 id="Ansible-shell模块"><a href="#Ansible-shell模块" class="headerlink" title="Ansible shell模块"></a><a id="shell">Ansible shell模块</a></h5><h6 id="spades-常用参数"><a href="#spades-常用参数" class="headerlink" title="&spades;常用参数"></a>&spades;常用参数</h6><ul>
+<li><p>free_form：必须参数，指定需要远程执行的命令，但是并没有具体的一个参数名叫free_form</p>
+</li>
+<li><p>chdir: 此参数的作用就是指定一个目录，在执行对应的命令之前，会先进入到 chdir 参数指定的目录中。</p>
+</li>
+<li><p>creates：使用此参数指定一个文件，当指定的文件存在时，就不执行对应命令</p>
+</li>
+<li><p>removes：使用此参数指定一个文件，当指定的文件不存在时，就不执行对应命令</p>
+</li>
+<li><p>executable：默认情况下，shell 模块会调用远程主机中的 /bin/sh 去执行对应的命令，通常情况下，远程主机中的默认 shell 都是 bash。如果你想要使用其他类型的 shell 执行命令，则可以使用此参数指定某种类型的 shell 去执行对应的命令。指定 shell 文件时，需要使用绝对路径。</p>
+</li>
+</ul>
+<pre><code>[root@localhost ~]# ansible all -m shell -a &#39;echo $HOSTNAME&#39;
+192.168.1.20 | CHANGED | rc=0 &gt;&gt;
+node1
+
+192.168.1.30 | CHANGED | rc=0 &gt;&gt;
+node2
+[root@localhost ~]# ansible all -m shell -a &#39;chdir=/root creates=a.txt touch a.txt&#39;
+192.168.1.20 | SUCCESS | rc=0 &gt;&gt;
+skipped, since a.txt exists
+
+192.168.1.30 | CHANGED | rc=0 &gt;&gt;
+</code></pre><h5 id="Ansible-script模块"><a href="#Ansible-script模块" class="headerlink" title="Ansible script模块"></a><a id="script">Ansible script模块</a></h5><h6 id="spades-常用参数-1"><a href="#spades-常用参数-1" class="headerlink" title="&spades;常用参数"></a>&spades;常用参数</h6><ul>
+<li><p>free_from: 必须参数，指定需要执行的脚本，脚本位于 ansible 管理主机本地，并没有具体的一个参数名叫 <code>free_form</code></p>
+</li>
+<li><p>chdir:此参数的作用就是指定一个远程主机中的目录，在执行对应的脚本之前，会先进入到 chdir 参数指定的目录中。</p>
+</li>
+<li><p>creates:使用此参数指定一个远程主机中的文件，当指定的文件存在时，就不执行对应脚本</p>
+</li>
+<li><p>removes：使用此参数指定一个远程主机中的文件，当指定的文件不存在时，就不执行对应脚</p>
+</li>
+</ul>
+<pre><code>[root@localhost ~]# cat /root/a.sh 
+#!/bin/bash
+echo $HOSTNAME
+[root@localhost ~]# ansible all -m script -a &#39;/root/a.sh&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;changed&quot;: true, 
+    &quot;rc&quot;: 0, 
+    &quot;stderr&quot;: &quot;Shared connection to 192.168.1.20 closed.\r\n&quot;, 
+    &quot;stderr_lines&quot;: [
+        &quot;Shared connection to 192.168.1.20 closed.&quot;
+    ], 
+    &quot;stdout&quot;: &quot;node1\r\n&quot;, 
+    &quot;stdout_lines&quot;: [
+        &quot;node1&quot;
+    ]
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;changed&quot;: true, 
+    &quot;rc&quot;: 0, 
+    &quot;stderr&quot;: &quot;Shared connection to 192.168.1.30 closed.\r\n&quot;, 
+    &quot;stderr_lines&quot;: [
+        &quot;Shared connection to 192.168.1.30 closed.&quot;
+    ], 
+    &quot;stdout&quot;: &quot;node2\r\n&quot;, 
+    &quot;stdout_lines&quot;: [
+        &quot;node2&quot;
+    ]
+}</code></pre><h5 id="Ansible-copy-模块"><a href="#Ansible-copy-模块" class="headerlink" title="Ansible copy 模块"></a><a id="copy">Ansible copy 模块</a></h5><blockquote>
+<p>copy 模块的作用就是拷贝文件，于fetch 模块类似，fetch 模块是从远程主机中拉取文件到 ansible 管理主机，而 copy 模块是将 ansible 管理主机上的文件拷贝到远程主机中。</p>
+</blockquote>
+<h6 id="spades-常用参数-2"><a href="#spades-常用参数-2" class="headerlink" title="&spades;常用参数"></a>&spades;常用参数</h6><ul>
+<li><p>src参数 ：用于指定需要copy的文件或目录。</p>
+</li>
+<li><p>dest参数 ：用于指定文件将被拷贝到远程主机的哪个目录中，dest为必须参数。</p>
+</li>
+<li><p>content参数 ：当不使用src指定拷贝的文件时，可以使用content直接指定文件内容，src与content两个参数必有其一，否则会报错。</p>
+</li>
+<li><p>force参数 : 当远程主机的目标路径中已经存在同名文件，并且与ansible主机中的文件内容不同时，是否强制覆盖，可选值有yes和no，默认值为yes，表示覆盖，如果设置为no，则不会执行覆盖拷贝操作，远程主机中的文件保持不变。</p>
+</li>
+<li><p>backup参数 : 当远程主机的目标路径中已经存在同名文件，并且与ansible主机中的文件内容不同时，是否对远程主机的文件进行备份，可选值有yes和no，当设置为yes时，会先备份远程主机中的文件，然后再将ansible主机中的文件拷贝到远程主机。</p>
+</li>
+<li><p>owner参数 : 指定文件拷贝到远程主机后的属主，但是远程主机上必须有对应的用户，否则会报错。</p>
+</li>
+<li><p>group参数 : 指定文件拷贝到远程主机后的属组，但是远程主机上必须有对应的组，否则会报错。</p>
+</li>
+<li><p>mode参数 : 指定文件拷贝到远程主机后的权限，如果你想将权限设置为”rw-r–r–“，则可以使用mode=0644表示，如果你想要在user对应的权限位上添加执行权限，则可以使用mode=u+x表示</p>
+</li>
+</ul>
+<h6 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h6><pre><code>[root@localhost ~]# cp /etc/selinux/config  ./
+[root@localhost ~]# ansible all -m copy -a &#39;src=/root/config dest=/etc/selinux/&#39;
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;checksum&quot;: &quot;086428e2a122b0fec18cd17858f334ca65116f69&quot;, 
+    &quot;dest&quot;: &quot;/etc/selinux/config&quot;, 
+    &quot;gid&quot;: 0, 
+    &quot;group&quot;: &quot;root&quot;, 
+    &quot;md5sum&quot;: &quot;8a7e44af619a4538054b458dfa31941d&quot;, 
+    &quot;mode&quot;: &quot;0644&quot;, 
+    &quot;owner&quot;: &quot;root&quot;, 
+    &quot;secontext&quot;: &quot;system_u:object_r:selinux_config_t:s0&quot;, 
+    &quot;size&quot;: 542, 
+    &quot;src&quot;: &quot;/root/.ansible/tmp/ansible-tmp-1581663895.49-1587190728464/source&quot;, 
+    &quot;state&quot;: &quot;file&quot;, 
+    &quot;uid&quot;: 0
+}
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;checksum&quot;: &quot;086428e2a122b0fec18cd17858f334ca65116f69&quot;, 
+    &quot;dest&quot;: &quot;/etc/selinux/config&quot;, 
+    &quot;gid&quot;: 0, 
+    &quot;group&quot;: &quot;root&quot;, 
+    &quot;md5sum&quot;: &quot;8a7e44af619a4538054b458dfa31941d&quot;, 
+    &quot;mode&quot;: &quot;0644&quot;, 
+    &quot;owner&quot;: &quot;root&quot;, 
+    &quot;secontext&quot;: &quot;system_u:object_r:selinux_config_t:s0&quot;, 
+    &quot;size&quot;: 542, 
+    &quot;src&quot;: &quot;/root/.ansible/tmp/ansible-tmp-1581663895.47-144696913414246/source&quot;, 
+    &quot;state&quot;: &quot;file&quot;, 
+    &quot;uid&quot;: 0
+}</code></pre><h5 id="Ansible-fetch-模块"><a href="#Ansible-fetch-模块" class="headerlink" title="Ansible fetch 模块"></a><a id="fetch">Ansible fetch 模块</a></h5><blockquote>
+<p>文件拉取模块主要是将远程主机中的文件拷贝到本机中，和copy模块的作用刚刚相反，并且在保存的时候使用hostname来进行保存，当文件不存在的时候，会出现错误，除非设置了选项fail_on_missing为yes</p>
+</blockquote>
+<h6 id="spades-常用参数-3"><a href="#spades-常用参数-3" class="headerlink" title="&spades;常用参数"></a>&spades;常用参数</h6><ul>
+<li><p>dest：用来存放文件的目录，例如存放目录为backup，源文件名称为/etc/profile在主机pythonserver中，那么保存为/backup/pythonserver/etc/profile</p>
+</li>
+<li><p>Fail_on_missing：当源文件不存在的时候，标识为失败</p>
+</li>
+<li><p>Flat：允许覆盖默认行为从hostname/path到/file的，如果dest以/结尾，它将使用源文件的基础名称</p>
+</li>
+<li><p>Src：在远程拉取的文件，并且必须是一个file，不能是目录</p>
+</li>
+<li><p>Validate_checksum：当文件fetch之后进行md5检查</p>
+</li>
+</ul>
+<h6 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h6><pre><code>[root@localhost ~]# ansible all -m fetch -a &#39;src=/root/a dest=/root/ fail_on_missing=yes&#39;
+192.168.1.30 | CHANGED =&gt; {
+    &quot;changed&quot;: true, 
+    &quot;checksum&quot;: &quot;55dd507997530d8472792bbe9fdac4d149c4f24f&quot;, 
+    &quot;dest&quot;: &quot;/root/192.168.1.30/root/a&quot;, 
+    &quot;md5sum&quot;: &quot;f3ebc1aa2bd794eca026415371266976&quot;, 
+    &quot;remote_checksum&quot;: &quot;55dd507997530d8472792bbe9fdac4d149c4f24f&quot;, 
+    &quot;remote_md5sum&quot;: null
+}
+192.168.1.20 | CHANGED =&gt; {
+    &quot;changed&quot;: true, 
+    &quot;checksum&quot;: &quot;d9e9a8ca6efc77fd57e0e885fd28524613fd282b&quot;, 
+    &quot;dest&quot;: &quot;/root/192.168.1.20/root/a&quot;, 
+    &quot;md5sum&quot;: &quot;7f92bd2d57cc9122ec54a72850c82815&quot;, 
+    &quot;remote_checksum&quot;: &quot;d9e9a8ca6efc77fd57e0e885fd28524613fd282b&quot;, 
+    &quot;remote_md5sum&quot;: null
+}
+[root@localhost ~]# ls
+192.168.1.20  192.168.1.30  anaconda-ks.cfg  a.sh  config
+[root@localhost ~]# ls 192.168.1.20/root/ 192.168.1.30/root/
+192.168.1.20/root/:
+a
+
+192.168.1.30/root/:
+a</code></pre><h5 id="Ansible-file-模块"><a href="#Ansible-file-模块" class="headerlink" title="Ansible file 模块"></a><a id="file">Ansible file 模块</a></h5><blockquote>
+<p>file 模块可以帮助我们完成一些对文件的基本操作。比如，创建文件或目录、删除文件或目录、修改文件权限等。</p>
+</blockquote>
+<h6 id="spades-常用参数-4"><a href="#spades-常用参数-4" class="headerlink" title="&spades;常用参数"></a>&spades;常用参数</h6><ul>
+<li><p>path参数 ：必须参数，用于指定要操作的文件或目录，在之前版本的ansible中，使用dest参数或者name参数指定要操作的文件或目录，为了兼容之前的版本，使用dest或name也可以。</p>
+</li>
+<li><p>state参数 ：此参数非常灵活，其对应的值需要根据情况设定。比如，我们想要在远程主机上创建/testdir/a/b目录，那么则需要设置path=/testdir/a/b，但是，我们无法从”/testdir/a/b“这个路径看出b是一个文件还是一个目录，ansible也同样无法单单从一个字符串就知道你要创建文件还是目录，所以，我们需要通过state参数进行说明。当我们想要创建的/testdir/a/b是一个目录时，需要将state的值设置为directory，”directory”为目录之意，当它与path结合，ansible就能知道我们要操作的目标是一个目录。同理，当我们想要操作的/testdir/a/b是一个文件时，则需要将state的值设置为touch。当我们想要创建软链接文件时，需将state设置为link。想要创建硬链接文件时，需要将state设置为hard。当我们想要删除一个文件时（删除时不用区分目标是文件、目录、还是链接），则需要将state的值设置为absent，”absent”为缺席之意，当我们想让操作的目标”缺席”时，就表示我们想要删除目标。</p>
+</li>
+<li><p>src参数 ：当state设置为link或者hard时，表示我们想要创建一个软链或者硬链，所以，我们必须指明软链或硬链链接的哪个文件，通过src参数即可指定链接源。</p>
+</li>
+<li><p>force参数 : 当state=link的时候，可配合此参数强制创建链接文件，当force=yes时，表示强制创建链接文件。不过强制创建链接文件分为三种情况。情况一：当要创建的链接文件指向的源文件并不存在时，使用此参数，可以先强制创建出链接文件。情况二：当要创建链接文件的目录中已经存在与链接文件同名的文件时，将force设置为yes，会将同名文件覆盖为链接文件，相当于删除同名文件，创建链接文件。情况三：当要创建链接文件的目录中已经存在与链接文件同名的文件，并且链接文件指向的源文件也不存在，这时会强制替换同名文件为链接文件。</p>
+</li>
+<li><p>owner参数 ：用于指定被操作文件的属主，属主对应的用户必须在远程主机中存在，否则会报错。</p>
+</li>
+<li><p>group参数 ：用于指定被操作文件的属组，属组对应的组必须在远程主机中存在，否则会报错。</p>
+</li>
+<li><p>mode参数：用于指定被操作文件的权限，比如，如果想要将文件权限设置为”rw-r-x—“，则可以使用mode=650进行设置，或者使用mode=0650，效果也是相同的。如果想要设置特殊权限，比如为二进制文件设置suid，则可以使用mode=4700。</p>
+</li>
+<li><p>recurse参数：当要操作的文件为目录，将recurse设置为yes，可以递归的修改目录中文件的属性。</p>
+</li>
+</ul>
+<h6 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h6><p>◆ 创建文件test</p>
+<pre><code>[root@localhost ~]# ansible all -m file -a &#39;path=/root/test state=touch&#39;
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;dest&quot;: &quot;/root/test&quot;, 
+    &quot;gid&quot;: 0, 
+    &quot;group&quot;: &quot;root&quot;, 
+    &quot;mode&quot;: &quot;0644&quot;, 
+    &quot;owner&quot;: &quot;root&quot;, 
+    &quot;size&quot;: 0, 
+    &quot;state&quot;: &quot;file&quot;, 
+    &quot;uid&quot;: 0
+}
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;dest&quot;: &quot;/root/test&quot;, 
+    &quot;gid&quot;: 0, 
+    &quot;group&quot;: &quot;root&quot;, 
+    &quot;mode&quot;: &quot;0644&quot;, 
+    &quot;owner&quot;: &quot;root&quot;, 
+    &quot;size&quot;: 0, 
+    &quot;state&quot;: &quot;file&quot;, 
+    &quot;uid&quot;: 0
+}
+[root@localhost ~]# ansible all -a &#39;ls /root&#39;
+192.168.1.20 | CHANGED | rc=0 &gt;&gt;
+a
+anaconda-ks.cfg
+a.txt
+test
+
+192.168.1.30 | CHANGED | rc=0 &gt;&gt;
+a
+anaconda-ks.cfg
+a.txt
+test</code></pre><p>◆ 删除文件</p>
+<pre><code>[root@localhost ~]# ansible all -m file -a &#39;path=/root/test state=absent&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;path&quot;: &quot;/root/test&quot;, 
+    &quot;state&quot;: &quot;absent&quot;
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;path&quot;: &quot;/root/test&quot;, 
+    &quot;state&quot;: &quot;absent&quot;
+}</code></pre><p>◆创建软连接</p>
+<pre><code>[root@localhost ~]# ansible all -m file -a &#39;path=/root/a.txt.test state=link src=/root/a.txt&#39;
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;dest&quot;: &quot;/root/a.txt.test&quot;, 
+    &quot;gid&quot;: 0, 
+    &quot;group&quot;: &quot;root&quot;, 
+    &quot;mode&quot;: &quot;0777&quot;, 
+    &quot;owner&quot;: &quot;root&quot;, 
+    &quot;size&quot;: 11, 
+    &quot;src&quot;: &quot;/root/a.txt&quot;, 
+    &quot;state&quot;: &quot;link&quot;, 
+    &quot;uid&quot;: 0
+}
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;dest&quot;: &quot;/root/a.txt.test&quot;, 
+    &quot;gid&quot;: 0, 
+    &quot;group&quot;: &quot;root&quot;, 
+    &quot;mode&quot;: &quot;0777&quot;, 
+    &quot;owner&quot;: &quot;root&quot;, 
+    &quot;size&quot;: 11, 
+    &quot;src&quot;: &quot;/root/a.txt&quot;, 
+    &quot;state&quot;: &quot;link&quot;, 
+    &quot;uid&quot;: 0
+}</code></pre><h5 id="Ansible-cron-模块"><a href="#Ansible-cron-模块" class="headerlink" title="Ansible cron 模块"></a><a id="cron">Ansible cron 模块</a></h5><blockquote>
+<p>cron 模块可以帮助我们管理远程主机中的计划任务，功能相当于 crontab 命令。</p>
+</blockquote>
+<h6 id="spades-常用参数-5"><a href="#spades-常用参数-5" class="headerlink" title="&spades;常用参数"></a>&spades;常用参数</h6><ul>
+<li><p>minute参数：此参数用于设置计划任务中分钟设定位的值，比如，上述示例1中分钟设定位的值为5，即 minute=5，当不使用此参数时，分钟设定位的值默认为”*”。</p>
+</li>
+<li><p>hour参数：此参数用于设置计划任务中小时设定位的值，比如，上述示例1中小时设定位的值为1，即 hour=1，当不使用此参数时，小时设定位的值默认为”*”。</p>
+</li>
+<li><p>day参数：此参数用于设置计划任务中日设定位的值，当不使用此参数时，日设定位的值默认为”*”。</p>
+</li>
+<li><p>month参数：此参数用于设置计划任务中月设定位的值，当不使用此参数时，月设定位的值默认为”*”。</p>
+</li>
+<li><p>weekday参数：此参数用于设置计划任务中周几设定位的值，当不使用此参数时，周几设定位的值默认为”*”。</p>
+</li>
+<li><p>special_time参数：在上述示例3与示例4中，计划任务的时间设定格式为 @reboot 或者@hourly。@reboot 表示重启时执行，@hourly 表示每小时执行一次，相当于设置成”0 0 * * *” ，这种@开头的时间设定格式则需要使用 special_time 参数进行设置，special_time 参数的可用值有 reboot(重启后)、yearly(每年)、annually(每年，与yearly相同)、monthly(每月)、weekly(每周)、daily(每天)、hourly(每时)。</p>
+</li>
+</ul>
+<pre><code>注意：当上述时间单位设定参数都未指定时，计划任务的时间设定默认会被设定为”* * * * *”，这样表示每秒都会执行一次计划任务，所以，在使用cron模块时，我们应该确定对应的时间参数设置正确。</code></pre><ul>
+<li><p>user参数：此参数用于设置当前计划任务属于哪个用户，当不使用此参数时，默认为管理员用户。</p>
+</li>
+<li><p>job参数：此参数用于指定计划的任务中需要实际执行的命令或者脚本，比如上例中的 “echo test” 命令。</p>
+</li>
+<li><p>name参数：此参数用于设置计划任务的名称，计划任务的名称会在注释中显示，当不指定计划任务的名称时，ansible 会默认为计划任务加入注释，注释的内容为 #Ansible: None，假设指定计划任务的名称为 test，那么注释的内容为#Ansible: test，在一台机器中，计划任务的名称应该具有唯一性，方便我们以后根据名称修改或删除计划任务。</p>
+</li>
+<li><p>state参数：当计划任务有名称时，我们可以根据名称修改或删除对应的任务，当删除计划任务时，需要将 state 的值设置为 absent。</p>
+</li>
+<li><p>disabled参数：当计划任务有名称时，我们可以根据名称使对应的任务”失效”（注释掉对应的任务）。注意，使用此参数时，除了需要指定任务的名称，还需要同时指定任务的job 以及任务的时间设定，而且任务的时间设定必须和对应任务完全相同，否则在注释任务的同时，任务的时间设定会被修改，除非你确定这样做。</p>
+</li>
+<li><p>backup参数：如果此参数的值设置为 yes，那么当修改或者删除对应的计划任务时，会先对计划任务进行备份，然后再对计划任务进行修改或者删除，cron 模块会在远程主机的 /tmp 目录下创建备份文件，以 crontab 开头并且随机加入一些字符，具体的备份文件名称会在返回信息的 backup_file 字段中看到，推荐将此此参数设置为 yes。</p>
+</li>
+</ul>
+<h6 id="示例：-3"><a href="#示例：-3" class="headerlink" title="示例："></a>示例：</h6><p>☛ 任务名为“crontest”,任务是每天1点5分执行 echo test</p>
+<pre><code>[root@ansible ~]# ansible all -m cron -a &quot;name=crontest minute=5 hour=1 job=&#39;echo tet&#39;&quot;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;envs&quot;: [], 
+    &quot;jobs&quot;: [
+        &quot;crontest&quot;
+    ]
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;envs&quot;: [], 
+    &quot;jobs&quot;: [
+        &quot;crontest&quot;
+    ]
+}</code></pre><p>☛ 每三天执行一次任务，当天1点1分开始执行</p>
+<pre><code>[root@ansible ~]# ansible all -m cron -a &quot;name=test minute=1 hour=1 day=*/3 job=&#39;echo hh&#39;&quot;
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;envs&quot;: [], 
+    &quot;jobs&quot;: [
+        &quot;crontest&quot;, 
+        &quot;test&quot;
+    ]
+}
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;envs&quot;: [], 
+    &quot;jobs&quot;: [
+        &quot;crontest&quot;, 
+        &quot;test&quot;
+    ]
+}</code></pre><h5 id="Ansible-yum-模块"><a href="#Ansible-yum-模块" class="headerlink" title="Ansible yum 模块"></a><a id="yum">Ansible yum 模块</a></h5><blockquote>
+<p>yum 模块可以帮助我们在远程主机上通过 yum 源管理软件包。</p>
+</blockquote>
+<h6 id="♠常用参数："><a href="#♠常用参数：" class="headerlink" title="♠常用参数："></a>♠常用参数：</h6><ul>
+<li><p>name参数：必须参数，用于指定需要管理的软件包，比如 nginx。</p>
+</li>
+<li><p>state参数：用于指定软件包的状态 ，默认值为。present，表示确保软件包已经安装，除了。present，其他可用值有 installed、latest、absent、removed，其中 installed 与present 等效，latest 表示安装 yum 中最新的版本，absent 和 removed 等效，表示删除对应的软件包。</p>
+</li>
+<li><p>disable_gpg_check参数：用于禁用对 rpm 包的公钥 gpg 验证。默认值为 no，表示不禁用验证，设置为 yes 表示禁用验证，即不验证包，直接安装。在对应的 yum 源没有开启 gpg 验证的情况下，需要将此参数的值设置为 yes，否则会报错而无法进行安装。</p>
+</li>
+<li><p>enablerepo参数：用于指定安装软件包时临时启用的 yum 源。假如你想要从A源中安装软件，但是你不确定A源是否启用了，你可以在安装软件包时将此参数的值设置为 yes，即使A源的设置是未启用，也可以在安装软件包时临时启用A源。</p>
+</li>
+<li><p>disablerepo参数：用于指定安装软件包时临时禁用的 yum 源。某些场景下需要此参数，比如，当多个 yum 源中同时存在要安装的软件包时，你可以使用此参数临时禁用某个源，这样设置后，在安装软件包时则不会从对应的源中选择安装包。</p>
+</li>
+<li><p>enablerepo 参数和 disablerepo 参数可以同时使用。</p>
+</li>
+</ul>
+<h6 id="示例：-4"><a href="#示例：-4" class="headerlink" title="示例："></a>示例：</h6><p>☛ 安装httpd服务</p>
+<pre><code>[root@ansible ~]# ansible all -m yum -a &#39;name=httpd&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;changes&quot;: {
+        &quot;installed&quot;: [
+            &quot;httpd&quot;
+        ]
+    }, 
+    &quot;msg&quot;: &quot;http://mirrors.cloud.aliyuncs.com/centos/7/os/x86_64/Packages/httpd-2.4.6-90.el7.centos.x86_64.rpm: [Errno 14] curl#6 - \&quot;Could not resolve host: mirrors.cloud.aliyuncs.com; Unknown error\&quot;\nTrying other mirror.\nwarning: /var/cache/yum/x86_64/7/base/packages/apr-1.4.8-5.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY\nhttp://mirrors.aliyuncs.com/centos/7/os/x86_64/Packages/mailcap-2.1.41-2.el7.noarch.rpm: [Errno 14] curl#7 - \&quot;Failed connect to mirrors.aliyuncs.com:80; Connection refused\&quot;\nTrying other mirror.\nhttp://mirrors.aliyuncs.com/centos/7/os/x86_64/Packages/apr-util-1.5.2-6.el7.x86_64.rpm: [Errno 14] curl#7 - \&quot;Failed connect to mirrors.aliyuncs.com:80; Connection refused\&quot;\nTrying other mirror.\nImporting GPG key 0xF4A80EB5:\n Userid     : \&quot;CentOS-7 Key (CentOS 7 Official Signing Key) &lt;security@centos.org&gt;\&quot;\n Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5\n From       : http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7\n&quot;, 
+    &quot;rc&quot;: 0, 
+    &quot;results&quot;: [
+        &quot;Loaded plugins: fastestmirror, langpacks\nLoading mirror speeds from cached hostfile\n * base: mirrors.aliyun.com\n * extras: mirrors.aliyun.com\n * updates: mirrors.aliyun.com\nResolving Dependencies\n--&gt; Running transaction check\n---&gt; Package httpd.x86_64 0:2.4.6-90.el7.centos will be installed\n--&gt; Processing Dependency: httpd-tools = 2.4.6-90.el7.centos for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Processing Dependency: /etc/mime.types for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Running transaction check\n---&gt; Package apr.x86_64 0:1.4.8-5.el7 will be installed\n---&gt; Package apr-util.x86_64 0:1.5.2-6.el7 will be installed\n---&gt; Package httpd-tools.x86_64 0:2.4.6-90.el7.centos will be installed\n---&gt; Package mailcap.noarch 0:2.1.41-2.el7 will be installed\n--&gt; Finished Dependency Resolution\n\nDependencies Resolved\n\n================================================================================\n Package            Arch          Version                     Repository   Size\n================================================================================\nInstalling:\n httpd              x86_64        2.4.6-90.el7.centos         base        2.7 M\nInstalling for dependencies:\n apr                x86_64        1.4.8-5.el7                 base        103 k\n apr-util           x86_64        1.5.2-6.el7                 base         92 k\n httpd-tools        x86_64        2.4.6-90.el7.centos         base         91 k\n mailcap            noarch        2.1.41-2.el7                base         31 k\n\nTransaction Summary\n================================================================================\nInstall  1 Package (+4 Dependent packages)\n\nTotal download size: 3.0 M\nInstalled size: 10 M\nDownloading packages:\nPublic key for apr-1.4.8-5.el7.x86_64.rpm is not installed\n--------------------------------------------------------------------------------\nTotal                                              139 kB/s | 3.0 MB  00:22     \nRetrieving key from http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7\nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n  Installing : apr-1.4.8-5.el7.x86_64                                       1/5 \n  Installing : apr-util-1.5.2-6.el7.x86_64                                  2/5 \n  Installing : httpd-tools-2.4.6-90.el7.centos.x86_64                       3/5 \n  Installing : mailcap-2.1.41-2.el7.noarch                                  4/5 \n  Installing : httpd-2.4.6-90.el7.centos.x86_64                             5/5 \n  Verifying  : apr-1.4.8-5.el7.x86_64                                       1/5 \n  Verifying  : mailcap-2.1.41-2.el7.noarch                                  2/5 \n  Verifying  : httpd-tools-2.4.6-90.el7.centos.x86_64                       3/5 \n  Verifying  : apr-util-1.5.2-6.el7.x86_64                                  4/5 \n  Verifying  : httpd-2.4.6-90.el7.centos.x86_64                             5/5 \n\nInstalled:\n  httpd.x86_64 0:2.4.6-90.el7.centos                                            \n\nDependency Installed:\n  apr.x86_64 0:1.4.8-5.el7                     apr-util.x86_64 0:1.5.2-6.el7    \n  httpd-tools.x86_64 0:2.4.6-90.el7.centos     mailcap.noarch 0:2.1.41-2.el7    \n\nComplete!\n&quot;
+    ]
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;changes&quot;: {
+        &quot;installed&quot;: [
+            &quot;httpd&quot;
+        ]
+    }, 
+    &quot;msg&quot;: &quot;http://mirrors.cloud.aliyuncs.com/centos/7/os/x86_64/Packages/httpd-2.4.6-90.el7.centos.x86_64.rpm: [Errno 14] curl#6 - \&quot;Could not resolve host: mirrors.cloud.aliyuncs.com; Unknown error\&quot;\nTrying other mirror.\nwarning: /var/cache/yum/x86_64/7/base/packages/apr-1.4.8-5.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY\nhttp://mirrors.aliyuncs.com/centos/7/os/x86_64/Packages/apr-util-1.5.2-6.el7.x86_64.rpm: [Errno 14] curl#7 - \&quot;Failed connect to mirrors.aliyuncs.com:80; Connection refused\&quot;\nTrying other mirror.\nhttp://mirrors.aliyuncs.com/centos/7/os/x86_64/Packages/mailcap-2.1.41-2.el7.noarch.rpm: [Errno 12] Timeout on http://mirrors.aliyuncs.com/centos/7/os/x86_64/Packages/mailcap-2.1.41-2.el7.noarch.rpm: (28, &#39;Connection timed out after 30002 milliseconds&#39;)\nTrying other mirror.\nImporting GPG key 0xF4A80EB5:\n Userid     : \&quot;CentOS-7 Key (CentOS 7 Official Signing Key) &lt;security@centos.org&gt;\&quot;\n Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5\n From       : http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7\n&quot;, 
+    &quot;rc&quot;: 0, 
+    &quot;results&quot;: [
+        &quot;Loaded plugins: fastestmirror, langpacks\nLoading mirror speeds from cached hostfile\n * base: mirrors.aliyun.com\n * extras: mirrors.aliyun.com\n * updates: mirrors.aliyun.com\nResolving Dependencies\n--&gt; Running transaction check\n---&gt; Package httpd.x86_64 0:2.4.6-90.el7.centos will be installed\n--&gt; Processing Dependency: httpd-tools = 2.4.6-90.el7.centos for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Processing Dependency: /etc/mime.types for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.6-90.el7.centos.x86_64\n--&gt; Running transaction check\n---&gt; Package apr.x86_64 0:1.4.8-5.el7 will be installed\n---&gt; Package apr-util.x86_64 0:1.5.2-6.el7 will be installed\n---&gt; Package httpd-tools.x86_64 0:2.4.6-90.el7.centos will be installed\n---&gt; Package mailcap.noarch 0:2.1.41-2.el7 will be installed\n--&gt; Finished Dependency Resolution\n\nDependencies Resolved\n\n================================================================================\n Package            Arch          Version                     Repository   Size\n================================================================================\nInstalling:\n httpd              x86_64        2.4.6-90.el7.centos         base        2.7 M\nInstalling for dependencies:\n apr                x86_64        1.4.8-5.el7                 base        103 k\n apr-util           x86_64        1.5.2-6.el7                 base         92 k\n httpd-tools        x86_64        2.4.6-90.el7.centos         base         91 k\n mailcap            noarch        2.1.41-2.el7                base         31 k\n\nTransaction Summary\n================================================================================\nInstall  1 Package (+4 Dependent packages)\n\nTotal download size: 3.0 M\nInstalled size: 10 M\nDownloading packages:\nPublic key for apr-1.4.8-5.el7.x86_64.rpm is not installed\n--------------------------------------------------------------------------------\nTotal                                              101 kB/s | 3.0 MB  00:30     \nRetrieving key from http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7\nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n  Installing : apr-1.4.8-5.el7.x86_64                                       1/5 \n  Installing : apr-util-1.5.2-6.el7.x86_64                                  2/5 \n  Installing : httpd-tools-2.4.6-90.el7.centos.x86_64                       3/5 \n  Installing : mailcap-2.1.41-2.el7.noarch                                  4/5 \n  Installing : httpd-2.4.6-90.el7.centos.x86_64                             5/5 \n  Verifying  : apr-1.4.8-5.el7.x86_64                                       1/5 \n  Verifying  : mailcap-2.1.41-2.el7.noarch                                  2/5 \n  Verifying  : httpd-tools-2.4.6-90.el7.centos.x86_64                       3/5 \n  Verifying  : apr-util-1.5.2-6.el7.x86_64                                  4/5 \n  Verifying  : httpd-2.4.6-90.el7.centos.x86_64                             5/5 \n\nInstalled:\n  httpd.x86_64 0:2.4.6-90.el7.centos                                            \n\nDependency Installed:\n  apr.x86_64 0:1.4.8-5.el7                     apr-util.x86_64 0:1.5.2-6.el7    \n  httpd-tools.x86_64 0:2.4.6-90.el7.centos     mailcap.noarch 0:2.1.41-2.el7    \n\nComplete!\n&quot;
+    ]
+}</code></pre><p>☛ 删除httpd服务</p>
+<pre><code>[root@ansible ~]# ansible all -m yum -a &#39;name=httpd state=removed&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;changes&quot;: {
+        &quot;removed&quot;: [
+            &quot;httpd&quot;
+        ]
+    }, 
+    &quot;msg&quot;: &quot;&quot;, 
+    &quot;rc&quot;: 0, 
+    &quot;results&quot;: [
+        &quot;已加载插件：fastestmirror, langpacks\n正在解决依赖关系\n--&gt; 正在检查事务\n---&gt; 软件包 httpd.x86_64.0.2.4.6-90.el7.centos 将被 删除\n--&gt; 解决依赖关系完成\n\n依赖关系解决\n\n================================================================================\n Package       架构           版本                          源             大小\n================================================================================\n正在删除:\n httpd         x86_64         2.4.6-90.el7.centos           @base         9.4 M\n\n事务概要\n================================================================================\n移除  1 软件包\n\n安装大小：9.4 M\nDownloading packages:\nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n  正在删除    : httpd-2.4.6-90.el7.centos.x86_64                            1/1 \n  验证中      : httpd-2.4.6-90.el7.centos.x86_64                            1/1 \n\n删除:\n  httpd.x86_64 0:2.4.6-90.el7.centos                                            \n\n完毕！\n&quot;
+    ]
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;changes&quot;: {
+        &quot;removed&quot;: [
+            &quot;httpd&quot;
+        ]
+    }, 
+    &quot;msg&quot;: &quot;&quot;, 
+    &quot;rc&quot;: 0, 
+    &quot;results&quot;: [
+        &quot;已加载插件：fastestmirror, langpacks\n正在解决依赖关系\n--&gt; 正在检查事务\n---&gt; 软件包 httpd.x86_64.0.2.4.6-90.el7.centos 将被 删除\n--&gt; 解决依赖关系完成\n\n依赖关系解决\n\n================================================================================\n Package       架构           版本                          源             大小\n================================================================================\n正在删除:\n httpd         x86_64         2.4.6-90.el7.centos           @base         9.4 M\n\n事务概要\n================================================================================\n移除  1 软件包\n\n安装大小：9.4 M\nDownloading packages:\nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n  正在删除    : httpd-2.4.6-90.el7.centos.x86_64                            1/1 \n  验证中      : httpd-2.4.6-90.el7.centos.x86_64                            1/1 \n\n删除:\n  httpd.x86_64 0:2.4.6-90.el7.centos                                            \n\n完毕！\n&quot;
+    ]
+}</code></pre><h5 id="Ansible-service-模块"><a href="#Ansible-service-模块" class="headerlink" title="Ansible service 模块"></a><a id="service">Ansible service 模块</a></h5><blockquote>
+<p>service 模块可以帮助我们管理远程主机上的服务。比如，启动或停止远程主机中的 nginx 服务。</p>
+</blockquote>
+<h6 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h6><pre><code>假如想要管理远程主机中的某个服务，那么这个服务必须能被 BSD init, OpenRC, SysV, Solaris SMF, systemd, upstart 中的任意一种所管理，否则 service 模块也无法管理远程主机的对应服务。这样说可能不容易理解，那么我们换个方式来解释，假设你在使用 centos6，那么你的 centos6 中的 nginx 必须能够通过 “service nginx start” 启动，如果你的 nginx 无法通过 “service nginx start” 进行启动，那么它也同样无法通过 ansible 的 service 模块启动。假设你在使用 centos7，那么你的 centos7 中的 nginx 则必须能够通过 “systemctl start nginx” 启动，如果它无法通过 “systemctl start nginx” 进行启动，那么它也同样无法通过 ansible 的 service 模块进行启动。centos6 中默认通过 sysv 管理服务，centos7 中默认通过 systemd 管理服务。所以，如果服务无法通过 BSD init, OpenRC, SysV, Solaris SMF, systemd, upstart 中的任意一种所管理，那么它也无法被ansible 的 service 模块管理。</code></pre><h6 id="♠常用参数"><a href="#♠常用参数" class="headerlink" title="♠常用参数"></a>♠常用参数</h6><ul>
+<li>name参数：此参数用于指定需要操作的服务名称，比如 nginx。</li>
+<li>state参数：此参数用于指定服务的状态，比如，我们想要启动远程主机中的 nginx，则可以将 state 的值设置为 started；如果想要停止远程主机中的服务，则可以将 state 的值设置为 stopped。此参数的可用值有 started、stopped、restarted、reloaded。</li>
+<li>enabled参数：此参数用于指定是否将服务设置为开机 启动项，设置为 yes 表示将对应服务设置为开机启动，设置为 no 表示不会开机启动。</li>
+</ul>
+<h6 id="示例：-5"><a href="#示例：-5" class="headerlink" title="示例："></a>示例：</h6><pre><code>[root@ansible ~]# ansible all -m service -a &#39;name=httpd state=started&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;name&quot;: &quot;httpd&quot;, 
+    &quot;state&quot;: &quot;started&quot;, 
+    &quot;status&quot;: {
+        &quot;ActiveEnterTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ActiveExitTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ActiveState&quot;: &quot;inactive&quot;, 
+        &quot;After&quot;: &quot;nss-lookup.target tmp.mount remote-fs.target systemd-journald.socket -.mount network.target basic.target system.slice&quot;, 
+        &quot;AllowIsolate&quot;: &quot;no&quot;, 
+        &quot;AmbientCapabilities&quot;: &quot;0&quot;, 
+        &quot;AssertResult&quot;: &quot;no&quot;, 
+        &quot;AssertTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;Before&quot;: &quot;shutdown.target&quot;, 
+        &quot;BlockIOAccounting&quot;: &quot;no&quot;, 
+        &quot;BlockIOWeight&quot;: &quot;18446744073709551615&quot;, 
+        &quot;CPUAccounting&quot;: &quot;no&quot;, 
+        &quot;CPUQuotaPerSecUSec&quot;: &quot;infinity&quot;, 
+        &quot;CPUSchedulingPolicy&quot;: &quot;0&quot;, 
+        &quot;CPUSchedulingPriority&quot;: &quot;0&quot;, 
+        &quot;CPUSchedulingResetOnFork&quot;: &quot;no&quot;, 
+        &quot;CPUShares&quot;: &quot;18446744073709551615&quot;, 
+        &quot;CanIsolate&quot;: &quot;no&quot;, 
+        &quot;CanReload&quot;: &quot;yes&quot;, 
+        &quot;CanStart&quot;: &quot;yes&quot;, 
+        &quot;CanStop&quot;: &quot;yes&quot;, 
+        &quot;CapabilityBoundingSet&quot;: &quot;18446744073709551615&quot;, 
+        &quot;ConditionResult&quot;: &quot;no&quot;, 
+        &quot;ConditionTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;Conflicts&quot;: &quot;shutdown.target&quot;, 
+        &quot;ControlPID&quot;: &quot;0&quot;, 
+        &quot;DefaultDependencies&quot;: &quot;yes&quot;, 
+        &quot;Delegate&quot;: &quot;no&quot;, 
+        &quot;Description&quot;: &quot;The Apache HTTP Server&quot;, 
+        &quot;DevicePolicy&quot;: &quot;auto&quot;, 
+        &quot;Documentation&quot;: &quot;man:httpd(8) man:apachectl(8)&quot;, 
+        &quot;EnvironmentFile&quot;: &quot;/etc/sysconfig/httpd (ignore_errors=no)&quot;, 
+        &quot;ExecMainCode&quot;: &quot;0&quot;, 
+        &quot;ExecMainExitTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ExecMainPID&quot;: &quot;0&quot;, 
+        &quot;ExecMainStartTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ExecMainStatus&quot;: &quot;0&quot;, 
+        &quot;ExecReload&quot;: &quot;{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -k graceful ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }&quot;, 
+        &quot;ExecStart&quot;: &quot;{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -DFOREGROUND ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }&quot;, 
+        &quot;ExecStop&quot;: &quot;{ path=/bin/kill ; argv[]=/bin/kill -WINCH ${MAINPID} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }&quot;, 
+        &quot;FailureAction&quot;: &quot;none&quot;, 
+        &quot;FileDescriptorStoreMax&quot;: &quot;0&quot;, 
+        &quot;FragmentPath&quot;: &quot;/usr/lib/systemd/system/httpd.service&quot;, 
+        &quot;GuessMainPID&quot;: &quot;yes&quot;, 
+        &quot;IOScheduling&quot;: &quot;0&quot;, 
+        &quot;Id&quot;: &quot;httpd.service&quot;, 
+        &quot;IgnoreOnIsolate&quot;: &quot;no&quot;, 
+        &quot;IgnoreOnSnapshot&quot;: &quot;no&quot;, 
+        &quot;IgnoreSIGPIPE&quot;: &quot;yes&quot;, 
+        &quot;InactiveEnterTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;InactiveExitTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;JobTimeoutAction&quot;: &quot;none&quot;, 
+        &quot;JobTimeoutUSec&quot;: &quot;0&quot;, 
+        &quot;KillMode&quot;: &quot;control-group&quot;, 
+        &quot;KillSignal&quot;: &quot;18&quot;, 
+        &quot;LimitAS&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitCORE&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitCPU&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitDATA&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitFSIZE&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitLOCKS&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitMEMLOCK&quot;: &quot;65536&quot;, 
+        &quot;LimitMSGQUEUE&quot;: &quot;819200&quot;, 
+        &quot;LimitNICE&quot;: &quot;0&quot;, 
+        &quot;LimitNOFILE&quot;: &quot;4096&quot;, 
+        &quot;LimitNPROC&quot;: &quot;3795&quot;, 
+        &quot;LimitRSS&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitRTPRIO&quot;: &quot;0&quot;, 
+        &quot;LimitRTTIME&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitSIGPENDING&quot;: &quot;3795&quot;, 
+        &quot;LimitSTACK&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LoadState&quot;: &quot;loaded&quot;, 
+        &quot;MainPID&quot;: &quot;0&quot;, 
+        &quot;MemoryAccounting&quot;: &quot;no&quot;, 
+        &quot;MemoryCurrent&quot;: &quot;18446744073709551615&quot;, 
+        &quot;MemoryLimit&quot;: &quot;18446744073709551615&quot;, 
+        &quot;MountFlags&quot;: &quot;0&quot;, 
+        &quot;Names&quot;: &quot;httpd.service&quot;, 
+        &quot;NeedDaemonReload&quot;: &quot;no&quot;, 
+        &quot;Nice&quot;: &quot;0&quot;, 
+        &quot;NoNewPrivileges&quot;: &quot;no&quot;, 
+        &quot;NonBlocking&quot;: &quot;no&quot;, 
+        &quot;NotifyAccess&quot;: &quot;main&quot;, 
+        &quot;OOMScoreAdjust&quot;: &quot;0&quot;, 
+        &quot;OnFailureJobMode&quot;: &quot;replace&quot;, 
+        &quot;PermissionsStartOnly&quot;: &quot;no&quot;, 
+        &quot;PrivateDevices&quot;: &quot;no&quot;, 
+        &quot;PrivateNetwork&quot;: &quot;no&quot;, 
+        &quot;PrivateTmp&quot;: &quot;yes&quot;, 
+        &quot;ProtectHome&quot;: &quot;no&quot;, 
+        &quot;ProtectSystem&quot;: &quot;no&quot;, 
+        &quot;RefuseManualStart&quot;: &quot;no&quot;, 
+        &quot;RefuseManualStop&quot;: &quot;no&quot;, 
+        &quot;RemainAfterExit&quot;: &quot;no&quot;, 
+        &quot;Requires&quot;: &quot;-.mount basic.target&quot;, 
+        &quot;RequiresMountsFor&quot;: &quot;/var/tmp&quot;, 
+        &quot;Restart&quot;: &quot;no&quot;, 
+        &quot;RestartUSec&quot;: &quot;100ms&quot;, 
+        &quot;Result&quot;: &quot;success&quot;, 
+        &quot;RootDirectoryStartOnly&quot;: &quot;no&quot;, 
+        &quot;RuntimeDirectoryMode&quot;: &quot;0755&quot;, 
+        &quot;SameProcessGroup&quot;: &quot;no&quot;, 
+        &quot;SecureBits&quot;: &quot;0&quot;, 
+        &quot;SendSIGHUP&quot;: &quot;no&quot;, 
+        &quot;SendSIGKILL&quot;: &quot;yes&quot;, 
+        &quot;Slice&quot;: &quot;system.slice&quot;, 
+        &quot;StandardError&quot;: &quot;inherit&quot;, 
+        &quot;StandardInput&quot;: &quot;null&quot;, 
+        &quot;StandardOutput&quot;: &quot;journal&quot;, 
+        &quot;StartLimitAction&quot;: &quot;none&quot;, 
+        &quot;StartLimitBurst&quot;: &quot;5&quot;, 
+        &quot;StartLimitInterval&quot;: &quot;10000000&quot;, 
+        &quot;StartupBlockIOWeight&quot;: &quot;18446744073709551615&quot;, 
+        &quot;StartupCPUShares&quot;: &quot;18446744073709551615&quot;, 
+        &quot;StatusErrno&quot;: &quot;0&quot;, 
+        &quot;StopWhenUnneeded&quot;: &quot;no&quot;, 
+        &quot;SubState&quot;: &quot;dead&quot;, 
+        &quot;SyslogLevelPrefix&quot;: &quot;yes&quot;, 
+        &quot;SyslogPriority&quot;: &quot;30&quot;, 
+        &quot;SystemCallErrorNumber&quot;: &quot;0&quot;, 
+        &quot;TTYReset&quot;: &quot;no&quot;, 
+        &quot;TTYVHangup&quot;: &quot;no&quot;, 
+        &quot;TTYVTDisallocate&quot;: &quot;no&quot;, 
+        &quot;TasksAccounting&quot;: &quot;no&quot;, 
+        &quot;TasksCurrent&quot;: &quot;18446744073709551615&quot;, 
+        &quot;TasksMax&quot;: &quot;18446744073709551615&quot;, 
+        &quot;TimeoutStartUSec&quot;: &quot;1min 30s&quot;, 
+        &quot;TimeoutStopUSec&quot;: &quot;1min 30s&quot;, 
+        &quot;TimerSlackNSec&quot;: &quot;50000&quot;, 
+        &quot;Transient&quot;: &quot;no&quot;, 
+        &quot;Type&quot;: &quot;notify&quot;, 
+        &quot;UMask&quot;: &quot;0022&quot;, 
+        &quot;UnitFilePreset&quot;: &quot;disabled&quot;, 
+        &quot;UnitFileState&quot;: &quot;disabled&quot;, 
+        &quot;Wants&quot;: &quot;system.slice&quot;, 
+        &quot;WatchdogTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;WatchdogUSec&quot;: &quot;0&quot;
+    }
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;name&quot;: &quot;httpd&quot;, 
+    &quot;state&quot;: &quot;started&quot;, 
+    &quot;status&quot;: {
+        &quot;ActiveEnterTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ActiveExitTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ActiveState&quot;: &quot;inactive&quot;, 
+        &quot;After&quot;: &quot;-.mount system.slice nss-lookup.target network.target systemd-journald.socket remote-fs.target basic.target tmp.mount&quot;, 
+        &quot;AllowIsolate&quot;: &quot;no&quot;, 
+        &quot;AmbientCapabilities&quot;: &quot;0&quot;, 
+        &quot;AssertResult&quot;: &quot;no&quot;, 
+        &quot;AssertTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;Before&quot;: &quot;shutdown.target&quot;, 
+        &quot;BlockIOAccounting&quot;: &quot;no&quot;, 
+        &quot;BlockIOWeight&quot;: &quot;18446744073709551615&quot;, 
+        &quot;CPUAccounting&quot;: &quot;no&quot;, 
+        &quot;CPUQuotaPerSecUSec&quot;: &quot;infinity&quot;, 
+        &quot;CPUSchedulingPolicy&quot;: &quot;0&quot;, 
+        &quot;CPUSchedulingPriority&quot;: &quot;0&quot;, 
+        &quot;CPUSchedulingResetOnFork&quot;: &quot;no&quot;, 
+        &quot;CPUShares&quot;: &quot;18446744073709551615&quot;, 
+        &quot;CanIsolate&quot;: &quot;no&quot;, 
+        &quot;CanReload&quot;: &quot;yes&quot;, 
+        &quot;CanStart&quot;: &quot;yes&quot;, 
+        &quot;CanStop&quot;: &quot;yes&quot;, 
+        &quot;CapabilityBoundingSet&quot;: &quot;18446744073709551615&quot;, 
+        &quot;ConditionResult&quot;: &quot;no&quot;, 
+        &quot;ConditionTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;Conflicts&quot;: &quot;shutdown.target&quot;, 
+        &quot;ControlPID&quot;: &quot;0&quot;, 
+        &quot;DefaultDependencies&quot;: &quot;yes&quot;, 
+        &quot;Delegate&quot;: &quot;no&quot;, 
+        &quot;Description&quot;: &quot;The Apache HTTP Server&quot;, 
+        &quot;DevicePolicy&quot;: &quot;auto&quot;, 
+        &quot;Documentation&quot;: &quot;man:httpd(8) man:apachectl(8)&quot;, 
+        &quot;EnvironmentFile&quot;: &quot;/etc/sysconfig/httpd (ignore_errors=no)&quot;, 
+        &quot;ExecMainCode&quot;: &quot;0&quot;, 
+        &quot;ExecMainExitTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ExecMainPID&quot;: &quot;0&quot;, 
+        &quot;ExecMainStartTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;ExecMainStatus&quot;: &quot;0&quot;, 
+        &quot;ExecReload&quot;: &quot;{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -k graceful ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }&quot;, 
+        &quot;ExecStart&quot;: &quot;{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -DFOREGROUND ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }&quot;, 
+        &quot;ExecStop&quot;: &quot;{ path=/bin/kill ; argv[]=/bin/kill -WINCH ${MAINPID} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }&quot;, 
+        &quot;FailureAction&quot;: &quot;none&quot;, 
+        &quot;FileDescriptorStoreMax&quot;: &quot;0&quot;, 
+        &quot;FragmentPath&quot;: &quot;/usr/lib/systemd/system/httpd.service&quot;, 
+        &quot;GuessMainPID&quot;: &quot;yes&quot;, 
+        &quot;IOScheduling&quot;: &quot;0&quot;, 
+        &quot;Id&quot;: &quot;httpd.service&quot;, 
+        &quot;IgnoreOnIsolate&quot;: &quot;no&quot;, 
+        &quot;IgnoreOnSnapshot&quot;: &quot;no&quot;, 
+        &quot;IgnoreSIGPIPE&quot;: &quot;yes&quot;, 
+        &quot;InactiveEnterTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;InactiveExitTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;JobTimeoutAction&quot;: &quot;none&quot;, 
+        &quot;JobTimeoutUSec&quot;: &quot;0&quot;, 
+        &quot;KillMode&quot;: &quot;control-group&quot;, 
+        &quot;KillSignal&quot;: &quot;18&quot;, 
+        &quot;LimitAS&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitCORE&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitCPU&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitDATA&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitFSIZE&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitLOCKS&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitMEMLOCK&quot;: &quot;65536&quot;, 
+        &quot;LimitMSGQUEUE&quot;: &quot;819200&quot;, 
+        &quot;LimitNICE&quot;: &quot;0&quot;, 
+        &quot;LimitNOFILE&quot;: &quot;4096&quot;, 
+        &quot;LimitNPROC&quot;: &quot;3795&quot;, 
+        &quot;LimitRSS&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitRTPRIO&quot;: &quot;0&quot;, 
+        &quot;LimitRTTIME&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LimitSIGPENDING&quot;: &quot;3795&quot;, 
+        &quot;LimitSTACK&quot;: &quot;18446744073709551615&quot;, 
+        &quot;LoadState&quot;: &quot;loaded&quot;, 
+        &quot;MainPID&quot;: &quot;0&quot;, 
+        &quot;MemoryAccounting&quot;: &quot;no&quot;, 
+        &quot;MemoryCurrent&quot;: &quot;18446744073709551615&quot;, 
+        &quot;MemoryLimit&quot;: &quot;18446744073709551615&quot;, 
+        &quot;MountFlags&quot;: &quot;0&quot;, 
+        &quot;Names&quot;: &quot;httpd.service&quot;, 
+        &quot;NeedDaemonReload&quot;: &quot;no&quot;, 
+        &quot;Nice&quot;: &quot;0&quot;, 
+        &quot;NoNewPrivileges&quot;: &quot;no&quot;, 
+        &quot;NonBlocking&quot;: &quot;no&quot;, 
+        &quot;NotifyAccess&quot;: &quot;main&quot;, 
+        &quot;OOMScoreAdjust&quot;: &quot;0&quot;, 
+        &quot;OnFailureJobMode&quot;: &quot;replace&quot;, 
+        &quot;PermissionsStartOnly&quot;: &quot;no&quot;, 
+        &quot;PrivateDevices&quot;: &quot;no&quot;, 
+        &quot;PrivateNetwork&quot;: &quot;no&quot;, 
+        &quot;PrivateTmp&quot;: &quot;yes&quot;, 
+        &quot;ProtectHome&quot;: &quot;no&quot;, 
+        &quot;ProtectSystem&quot;: &quot;no&quot;, 
+        &quot;RefuseManualStart&quot;: &quot;no&quot;, 
+        &quot;RefuseManualStop&quot;: &quot;no&quot;, 
+        &quot;RemainAfterExit&quot;: &quot;no&quot;, 
+        &quot;Requires&quot;: &quot;basic.target -.mount&quot;, 
+        &quot;RequiresMountsFor&quot;: &quot;/var/tmp&quot;, 
+        &quot;Restart&quot;: &quot;no&quot;, 
+        &quot;RestartUSec&quot;: &quot;100ms&quot;, 
+        &quot;Result&quot;: &quot;success&quot;, 
+        &quot;RootDirectoryStartOnly&quot;: &quot;no&quot;, 
+        &quot;RuntimeDirectoryMode&quot;: &quot;0755&quot;, 
+        &quot;SameProcessGroup&quot;: &quot;no&quot;, 
+        &quot;SecureBits&quot;: &quot;0&quot;, 
+        &quot;SendSIGHUP&quot;: &quot;no&quot;, 
+        &quot;SendSIGKILL&quot;: &quot;yes&quot;, 
+        &quot;Slice&quot;: &quot;system.slice&quot;, 
+        &quot;StandardError&quot;: &quot;inherit&quot;, 
+        &quot;StandardInput&quot;: &quot;null&quot;, 
+        &quot;StandardOutput&quot;: &quot;journal&quot;, 
+        &quot;StartLimitAction&quot;: &quot;none&quot;, 
+        &quot;StartLimitBurst&quot;: &quot;5&quot;, 
+        &quot;StartLimitInterval&quot;: &quot;10000000&quot;, 
+        &quot;StartupBlockIOWeight&quot;: &quot;18446744073709551615&quot;, 
+        &quot;StartupCPUShares&quot;: &quot;18446744073709551615&quot;, 
+        &quot;StatusErrno&quot;: &quot;0&quot;, 
+        &quot;StopWhenUnneeded&quot;: &quot;no&quot;, 
+        &quot;SubState&quot;: &quot;dead&quot;, 
+        &quot;SyslogLevelPrefix&quot;: &quot;yes&quot;, 
+        &quot;SyslogPriority&quot;: &quot;30&quot;, 
+        &quot;SystemCallErrorNumber&quot;: &quot;0&quot;, 
+        &quot;TTYReset&quot;: &quot;no&quot;, 
+        &quot;TTYVHangup&quot;: &quot;no&quot;, 
+        &quot;TTYVTDisallocate&quot;: &quot;no&quot;, 
+        &quot;TasksAccounting&quot;: &quot;no&quot;, 
+        &quot;TasksCurrent&quot;: &quot;18446744073709551615&quot;, 
+        &quot;TasksMax&quot;: &quot;18446744073709551615&quot;, 
+        &quot;TimeoutStartUSec&quot;: &quot;1min 30s&quot;, 
+        &quot;TimeoutStopUSec&quot;: &quot;1min 30s&quot;, 
+        &quot;TimerSlackNSec&quot;: &quot;50000&quot;, 
+        &quot;Transient&quot;: &quot;no&quot;, 
+        &quot;Type&quot;: &quot;notify&quot;, 
+        &quot;UMask&quot;: &quot;0022&quot;, 
+        &quot;UnitFilePreset&quot;: &quot;disabled&quot;, 
+        &quot;UnitFileState&quot;: &quot;disabled&quot;, 
+        &quot;Wants&quot;: &quot;system.slice&quot;, 
+        &quot;WatchdogTimestampMonotonic&quot;: &quot;0&quot;, 
+        &quot;WatchdogUSec&quot;: &quot;0&quot;
+    }
+}</code></pre><h5 id="Ansible-user模块"><a href="#Ansible-user模块" class="headerlink" title="Ansible user模块"></a><a id="user">Ansible user模块</a></h5><blockquote>
+<p>user 模块可以帮助我们管理远程主机上的用户，比如创建用户、修改用户、删除用户、为用户创建密钥对等操作。</p>
+</blockquote>
+<h6 id="♠常用参数-1"><a href="#♠常用参数-1" class="headerlink" title="♠常用参数"></a>♠常用参数</h6><ul>
+<li><p>name参数：必须参数，用于指定要操作的用户名称，可以使用别名 user。</p>
+</li>
+<li><p>group参数：此参数用于指定用户所在的基本组。</p>
+</li>
+<li><p>gourps参数：此参数用于指定用户所在的附加组。注意，如果说用户已经存在并且已经拥有多个附加组，那么如果想要继续添加新的附加组，需要结合 append 参数使用，否则在默认情况下，当再次使用 - groups 参数设置附加组时，用户原来的附加组会被覆盖。</p>
+</li>
+<li><p>append参数：如果用户原本就存在多个附加组，那么当使用 groups 参数设置附加组时，当前设置会覆盖原来的附加组设置，如果不想覆盖原来的附加组设置，需要结合 append 参数，将 append 设置为 yes，表示追加附加组到现有的附加组设置，append 默认值为 no。</p>
+</li>
+<li><p>shell参数：此参数用于指定用户的默认 shell。</p>
+</li>
+<li><p>uid参数：此参数用于指定用户的 uid 号。</p>
+</li>
+<li><p>expires参数：此参数用于指定用户的过期时间，相当于设置 /etc/shadow 文件中的的第8列，比如，你想要设置用户的过期日期为2018年12月31日，那么你首先要获取到2018年12月31日的 unix 时间戳，使用命令 “date -d 2018-12-31 +%s” 获取到的时间戳为1546185600，所以，当设置 expires=1546185600 时，表示用户的过期时间为2018年12月31日0点0分，设置成功后，查看远程主机的 /etc/shadow 文件，对应用户的第8八列的值将变成17895（表示1970年1月1日到2018年12月31日的天数，unix 时间戳的值会自动转换为天数，我们不用手动的进行换算），目前此参数只支持在 Linux 和 FreeBSD 系统中使用。</p>
+</li>
+<li><p>comment参数：此参数用于指定用户的注释信息。</p>
+</li>
+<li><p>state参数：此参数用于指定用户是否存在于远程主机中，可选值有 present、absent，默认值为 present，表示用户需要存在，当设置为 absent 时表示删除用户。</p>
+</li>
+<li><p>remove参数：当 state 的值设置为 absent 时，表示要删除远程主机中的用户。但是在删除用户时，不会删除用户的家目录等信息，这是因为 remove 参数的默认值为 no，如果设置为yes，在删除用户的同时，会删除用户的家目录。当 state=absent 并且 remove=yes 时，相当于执行 “userdel –remove” 命令。</p>
+</li>
+<li><p>password参数：此参数用于指定用户的密码。但是这个密码不能是明文的密码，而是一个对明文密码”加密后”的字符串，相当于 /etc/shadow 文件中的密码字段，是一个对明文密码进行哈希后的字符串</p>
+</li>
+<li><p>update_password参数：此参数有两个值可选，always 和 on_create，当此参数的值设置为always 时表示，如果 password 参数设置的值与用户当前的加密过的密码字符串不一致，则直接更新用户的密码，默认值即为 always，但是当此参数设置为 on_create 时，如果 password参数设置的值与用户当前的加密过的密码字符串不一致，则不会更新用户的密码字符串，保持之前的密码设定。如果是新创建的用户，即使此参数设置为 on_create，也会将用户的密码设置为 password 参数对应的值。</p>
+</li>
+<li><p>generate_ssh_key参数：此参数默认值为 no，如果设置为 yes，表示为对应的用户生成 ssh 密钥对，默认在用户家目录的 ./ssh 目录中生成名为 id_rsa 的私钥和名为 id_rsa.pub 的公钥，如果同名的密钥已经存在与对应的目录中，原同名密钥并不会被覆盖(不做任何操作)。</p>
+</li>
+<li><p>ssh_key_file参数：当 generate_ssh_key 参数的值为 yes 时，使用此参数自定义生成 ssh 私钥的路径和名称，对应公钥会在同路径下生成，公钥名以私钥名开头，以”.pub”结尾。</p>
+</li>
+<li><p>ssh_key_comment参数：当 generate_ssh_key 参数的值为 yes 时，在创建证书时，使用此参数设置公钥中的注释信息。但是如果同名的密钥对已经存在，则并不会修改原来的注释信息，即不做任何操作。当不指定此参数时，默认的注释信息为”ansible-generated on 远程主机的主机名”。</p>
+</li>
+<li><p>ssh_key_passphrase参数：当 generate_ssh_key 参数的值为 yes 时，在创建证书时，使用此参数设置私钥的密码。但是如果同名的密钥对已经存在，则并不会修改原来的密码，即不做任何操作。</p>
+</li>
+<li><p>ssh_key_type参数：当 generate_ssh_key 参数的值为 yes 时，在创建证书时，使用此参数设置密钥对的类型。默认密钥类型为 rsa，但是如果同名的密钥对已经存在，并不会对同名密钥做任何操作。</p>
+</li>
+</ul>
+<h6 id="示例：-6"><a href="#示例：-6" class="headerlink" title="示例："></a>示例：</h6><p>☛创建用户test</p>
+<pre><code>[root@ansible ~]# ansible all -m user -a &#39;name=test&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;comment&quot;: &quot;&quot;, 
+    &quot;create_home&quot;: true, 
+    &quot;group&quot;: 1000, 
+    &quot;home&quot;: &quot;/home/test&quot;, 
+    &quot;name&quot;: &quot;test&quot;, 
+    &quot;shell&quot;: &quot;/bin/bash&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;system&quot;: false, 
+    &quot;uid&quot;: 1000
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;comment&quot;: &quot;&quot;, 
+    &quot;create_home&quot;: true, 
+    &quot;group&quot;: 1000, 
+    &quot;home&quot;: &quot;/home/test&quot;, 
+    &quot;name&quot;: &quot;test&quot;, 
+    &quot;shell&quot;: &quot;/bin/bash&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;system&quot;: false, 
+    &quot;uid&quot;: 1000
+}</code></pre><p>☛设置test用户过期时间为2020-3-15，使用”date -d 2020-3-15“ ，命令获取对应日期的unix时间戳</p>
+<pre><code>[root@ansible ~]# date -d 2020-3-15 +%s
+1584201600
+[root@ansible ~]# ansible all -m user -a &#39;name=test expires=1584201600&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;append&quot;: false, 
+    &quot;changed&quot;: true, 
+    &quot;comment&quot;: &quot;&quot;, 
+    &quot;group&quot;: 1000, 
+    &quot;home&quot;: &quot;/home/test&quot;, 
+    &quot;move_home&quot;: false, 
+    &quot;name&quot;: &quot;test&quot;, 
+    &quot;shell&quot;: &quot;/bin/bash&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;uid&quot;: 1000
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;append&quot;: false, 
+    &quot;changed&quot;: true, 
+    &quot;comment&quot;: &quot;&quot;, 
+    &quot;group&quot;: 1000, 
+    &quot;home&quot;: &quot;/home/test&quot;, 
+    &quot;move_home&quot;: false, 
+    &quot;name&quot;: &quot;test&quot;, 
+    &quot;shell&quot;: &quot;/bin/bash&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;uid&quot;: 1000
+}</code></pre><p>☛给test用户设置密码，先使用Python crypt模块加密密码</p>
+<pre><code>[root@ansible ~]# python
+Python 2.7.5 (default, Aug  7 2019, 00:51:29) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import crypt;crypt.crypt(&#39;123456&#39;)
+&#39;$6$saydNQRbcZeufPj7$jO9PSN8quxT2/LX66olE9uJseB/U3UxSO3odcU9zMZHHj/OAHCu6NntvqcNB0UK/FmeQ9.yeeS2m/M1J7X3nh/&#39;
+[root@ansible ~]# ansible all -m user -a &#39;name=test  password=&quot;$6$saydNQRbcZeufPj7$jO9PSN8quxT2/LX66olE9uJseB/U3UxSO3odcU9zMZHHj/OAHCu6NntvqcNB0UK/FmeQ9.yeeS2m/M1J7X3nh/&quot;&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;append&quot;: false, 
+    &quot;changed&quot;: true, 
+    &quot;comment&quot;: &quot;&quot;, 
+    &quot;group&quot;: 1000, 
+    &quot;home&quot;: &quot;/home/test&quot;, 
+    &quot;move_home&quot;: false, 
+    &quot;name&quot;: &quot;test&quot;, 
+    &quot;password&quot;: &quot;NOT_LOGGING_PASSWORD&quot;, 
+    &quot;shell&quot;: &quot;/bin/bash&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;uid&quot;: 1000
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;append&quot;: false, 
+    &quot;changed&quot;: true, 
+    &quot;comment&quot;: &quot;&quot;, 
+    &quot;group&quot;: 1000, 
+    &quot;home&quot;: &quot;/home/test&quot;, 
+    &quot;move_home&quot;: false, 
+    &quot;name&quot;: &quot;test&quot;, 
+    &quot;password&quot;: &quot;NOT_LOGGING_PASSWORD&quot;, 
+    &quot;shell&quot;: &quot;/bin/bash&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;uid&quot;: 1000
+}</code></pre><h5 id="Ansible-group-模块"><a href="#Ansible-group-模块" class="headerlink" title="Ansible group 模块"></a><a id="group">Ansible group 模块</a></h5><blockquote>
+<p>group 模块可以帮助我们管理远程主机上的组。</p>
+</blockquote>
+<h6 id="♠常用参数：-1"><a href="#♠常用参数：-1" class="headerlink" title="♠常用参数："></a>♠常用参数：</h6><ul>
+<li>name：必须参数，用于指定要操作的组名称。</li>
+<li>state：用于指定组的状态，两个值可选，present，absent，默认为 present，设置为absent 表示删除组。</li>
+<li>gid：用于指定组的gid。</li>
+</ul>
+<h6 id="示例：-7"><a href="#示例：-7" class="headerlink" title="示例："></a>示例：</h6><p>☛ 创建用户组testgroup</p>
+<pre><code>[root@ansible ~]# ansible all -m group -a &#39;name=testgroup&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;gid&quot;: 1001, 
+    &quot;name&quot;: &quot;testgroup&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;system&quot;: false
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;gid&quot;: 1001, 
+    &quot;name&quot;: &quot;testgroup&quot;, 
+    &quot;state&quot;: &quot;present&quot;, 
+    &quot;system&quot;: false
+}</code></pre><p>☛ 删除用户testgroup,前提是没有用户把此组设为主组。</p>
+<pre><code>[root@ansible ~]# ansible all -m group -a &#39;name=testgroup state=absent&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;name&quot;: &quot;testgroup&quot;, 
+    &quot;state&quot;: &quot;absent&quot;
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;name&quot;: &quot;testgroup&quot;, 
+    &quot;state&quot;: &quot;absent&quot;
+}</code></pre><h5 id="Ansible-setup-模块"><a href="#Ansible-setup-模块" class="headerlink" title="Ansible setup 模块"></a><a id="setup" >Ansible setup 模块</a></h5><blockquote>
+<p>setup 模块用于收集远程主机的一些基本信息。</p>
+</blockquote>
+<h6 id="♠常用参数：-2"><a href="#♠常用参数：-2" class="headerlink" title="♠常用参数："></a>♠常用参数：</h6><ul>
+<li>filter参数：用于进行条件过滤。如果设置，仅返回匹配过滤条件的信息。</li>
+</ul>
+<h6 id="示例：-8"><a href="#示例：-8" class="headerlink" title="示例："></a>示例：</h6><p>☛ 过滤出ip地址</p>
+<pre><code>[root@ansible ~]# ansible all -m setup -a &#39;filter=ansible_all_ipv4_addresses&#39;
+192.168.1.20 | SUCCESS =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;ansible_all_ipv4_addresses&quot;: [
+            &quot;192.168.1.20&quot;
+        ], 
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: false
+}
+192.168.1.30 | SUCCESS =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;ansible_all_ipv4_addresses&quot;: [
+            &quot;192.168.1.30&quot;
+        ], 
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: false
+}</code></pre><h5 id="Ansible-replace-模块"><a href="#Ansible-replace-模块" class="headerlink" title="Ansible replace 模块"></a><a id="replace">Ansible replace 模块</a></h5><blockquote>
+<p>replace 模块可以根据我们指定的正则表达式替换文件中的字符串，文件中所有被匹配到的字符串都会被替换。</p>
+</blockquote>
+<h6 id="♠常用参数：-3"><a href="#♠常用参数：-3" class="headerlink" title="♠常用参数："></a>♠常用参数：</h6><ul>
+<li><p>path参数 ：必须参数，指定要操作的文件，2.3版本之前，只能使用 dest, destfile, name指定要操作的文件，2.4版本中，仍然可以使用这些参数名，这些参数名作为 path 参数的别名使用。</p>
+</li>
+<li><p>regexp参数 : 必须参数，指定一个 python 正则表达式，文件中与正则匹配的字符串将会被替换。</p>
+</li>
+<li><p>replace参数 ： 指定最终要替换成的字符串。</p>
+</li>
+<li><p>backup参数 ：是否在修改文件之前对文件进行备份，最好设置为yes。</p>
+</li>
+</ul>
+<h6 id="示例：-9"><a href="#示例：-9" class="headerlink" title="示例："></a>示例：</h6><p>☛将远程主机中a文件中的大写ABC 替换成小写</p>
+<pre><code>[root@ansible ~]# ansible all -m replace -a &#39;path=/root/a regexp=&quot;ABC&quot; replace=abc&#39;
+192.168.1.20 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;msg&quot;: &quot;1 replacements made&quot;
+}
+192.168.1.30 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    }, 
+    &quot;changed&quot;: true, 
+    &quot;msg&quot;: &quot;1 replacements made&quot;
+}</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://xxbk.cc" rel="external nofollow noreferrer">John Doe</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://xxbk.cc/2020/03/03/Ansible/ansible-2/">http://xxbk.cc/2020/03/03/Ansible/ansible-2/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://xxbk.cc" target="_blank">John Doe</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/03/03/Ansible/ansible-3/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Ansible playbook">
+                        
+                        <span class="card-title">Ansible playbook</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Ansible 命令工具Ansible-galaxy
+
+Ansible Galaxy 是一个免费共享和下载 Ansible 角色的网站，可以帮助我们更好的定义和学习roles。
+ansible-galaxy命令默认与 https://gal
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/03/Ansible/ansible-1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ansible部署安装及配置">
+                        
+                        <span class="card-title">ansible部署安装及配置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ansible架构图：
+ansible主要模块：
+HostInventory：记录由Ansible管理的主机信息，包括端口、密码、ip等。
+Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中，定义主机需要调用哪些模块来完
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://xxbk.cc" target="_blank">John Doe</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

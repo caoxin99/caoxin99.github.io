@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
+    <meta name="keywords" content="ansible部署安装及配置, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | Hexo</title>
+    <title>ansible部署安装及配置 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -303,12 +303,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">ansible部署安装及配置</h1>
                 </div>
             </div>
         </div>
@@ -454,15 +454,106 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h4 id="ansible架构图："><a href="#ansible架构图：" class="headerlink" title="ansible架构图："></a>ansible架构图：</h4><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1581240975317&di=11697d5a38fa939e8795366bf41132af&imgtype=0&src=http%3A%2F%2Fimg.dongcoder.com%2Fup%2Finfo%2F201811%2F20181124124236277013.png" alt=""></p>
+<p>ansible主要模块：</p>
+<pre><code class="Ansible：Ansible核心程序。">HostInventory：记录由Ansible管理的主机信息，包括端口、密码、ip等。
+Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中，定义主机需要调用哪些模块来完成的功能。
+CoreModules：核心模块，主要操作是通过调用核心模块来完成管理任务。
+CustomModules：自定义模块，完成核心模块无法完成的功能，支持多种语言。
+ConnectionPlugins：连接插件，Ansible和Host通信使用</code></pre>
+<h5 id="ansible-任务执行模式"><a href="#ansible-任务执行模式" class="headerlink" title="ansible 任务执行模式"></a>ansible 任务执行模式</h5><p> Ansible 系统由控制主机对被管节点的操作方式可分为两类，即adhoc和playbook：</p>
+<p>&diams; &diams; &diams; ad-hoc模式(点对点模式)</p>
+<p>&nbsp; &nbsp;使用单个模块，支持批量执行单条命令。ad-hoc 命令是一种可以快速输入的命令，而且不需要保存起来的命令。就相当于bash中的一句话shell。</p>
+<p>&diams; &diams; &diams; playbook模式(剧本模式)</p>
+<p>&nbsp; &nbsp;是Ansible主要管理方式，也是Ansible功能强大的关键所在。playbook通过多个task集合完成一类功能，如Web服务的安装部署、数据库服务器的批量备份等。可以简单地把playbook理解为通过组合多条ad-hoc操作的配置文件。</p>
+<h4 id="ansible-执行流程"><a href="#ansible-执行流程" class="headerlink" title="ansible 执行流程"></a>ansible 执行流程</h4><p><img src="http://d.idwsm.com/wp-content/uploads/2020/02/1204916-20171205162615738-1292598736-1.png" alt=""> Ansible在运行时， 首先读取<code>ansible.cfg</code>中的配置， 根据规则获取<code>Inventory</code>中的管理主机列表， 并行的在这些主机中执行配置的任务， 最后等待执行返回的结果。</p>
+<h5 id="ansible-命令执行过程"><a href="#ansible-命令执行过程" class="headerlink" title="ansible 命令执行过程"></a>ansible 命令执行过程</h5><ol>
+<li>加载自己的配置文件，默认<code>/etc/ansible/ansible.cfg</code>；</li>
+<li>查找对应的主机配置文件，找到要执行的主机或者组；</li>
+<li>加载自己对应的模块文件，如 command；</li>
+<li>通过ansible将模块或命令生成对应的临时py文件(python脚本)， 并将该文件传输至远程服务器；</li>
+<li>对应执行用户的家目录的<code>.ansible/tmp/XXX/XXX.PY</code>文件；</li>
+<li>给文件 +x 执行权限；</li>
+<li>执行并返回结果；</li>
+<li>删除临时py文件，<code>sleep 0</code>退出；</li>
+</ol>
+<h5 id="执行状态"><a href="#执行状态" class="headerlink" title="执行状态"></a>执行状态</h5><p>&clubs; 绿色：执行成功并且不需要做改变的操作<br>&clubs; 黄色：执行成功并且对目标主机做更改<br>&clubs; 红色：执行失败</p>
+<h5 id="ansible部署安装"><a href="#ansible部署安装" class="headerlink" title="ansible部署安装"></a>ansible部署安装</h5><pre><code>方式一：
+yum install epel-release -y
+yum install ansible –y
+方式二：
+使用pip安装
+pip install ansible
+方式三：
+git clone git://github.com/ansible/ansible.git --recursive
+cd ./ansible
+source ./hacking/env-setup
+确认安装：
+ansible --version</code></pre><h5 id="ansible相关文件"><a href="#ansible相关文件" class="headerlink" title="ansible相关文件"></a>ansible相关文件</h5><h6 id="diams-配置文件"><a href="#diams-配置文件" class="headerlink" title="&diams; 配置文件"></a>&diams; 配置文件</h6><pre><code>/etc/ansible/ansible.cfg ##配置文件
+/etc/ansible/hosts ##主机清单
+/etc/ansible/roles ##存放角色的目录</code></pre><h6 id="diams-程序"><a href="#diams-程序" class="headerlink" title="&diams; 程序"></a>&diams; 程序</h6><pre><code>/usr/bin/ansible 主程序，临时命令执行工具
+/usr/bin/ansible-doc 查看配置文档，模块功能查看工具
+/usr/bin/ansible-galaxy 下载/上传优秀代码或Roles模块的官网平台
+/usr/bin/ansible-playbook 定制自动化任务,编排剧本工具/usr/bin/ansible-pull 远程执行命令的工具
+/usr/bin/ansible-vault 文件加密工具
+/usr/bin/ansible-console 基于console界面与用户交互的执行工具</code></pre><h5 id="主机清单inventory"><a href="#主机清单inventory" class="headerlink" title="主机清单inventory"></a>主机清单inventory</h5><ul>
+<li>默认的inventory file为/etc/ansible/hosts</li>
+<li>inventory file 可以多个 通过 Dynamic Inventory 来动态生成</li>
+<li>inventory文件遵循INI文件风格，中括号中的字符为组名，可以将同一个主机同时归并到多个不同的组</li>
+<li>若目标主机使用了非默认的ssh端口，在主机名称之后使用冒号加端口来表明<h6 id="spades-示例："><a href="#spades-示例：" class="headerlink" title="&spades; 示例："></a>&spades; 示例：</h6><pre><code>[webserver]
+www[01:100].example.com
+www101.example.com:222
+[dbserver]
+db-[a:f].example.com</code></pre></li>
+</ul>
+<h5 id="ansible-配置文件"><a href="#ansible-配置文件" class="headerlink" title="ansible 配置文件"></a>ansible 配置文件</h5><ul>
+<li>ansible配置文件/etc/ansible/ansible.cfg(一般默认)<pre><code>[defaults]
+inventory      = /etc/ansible/hosts #主机列表配置文件
+library        = /usr/share/my_modules/ #库文件存放目录
+remote_tmp     = ~/.ansible/tmp #临时py命令文件存放在远程主机目录上
+local_tmp      = ~/.ansible/tmp 本地的临时命令执行目录
+forks          = 5 #默认并发数
+sudo_user      = root #默认sudo用户
+ask_sudo_pass = True #每次执行ansbile命令是否询问ssh密码
+host_key_checking = False #检查对应服务器的host_key，建议取消注释
+log_path=/var/log/ansible.log #日志文件</code></pre></li>
+</ul>
+<h5 id="ansible-常用命令"><a href="#ansible-常用命令" class="headerlink" title="ansible 常用命令"></a>ansible 常用命令</h5><h6 id="spades-ansible"><a href="#spades-ansible" class="headerlink" title="&spades; ansible"></a>&spades; ansible</h6><pre><code>ansible &lt;host-pattern&gt; [-m module_name] [-a args]
+ --version 显示版本
+ -m moudule 指定模块，默认为command
+ -v 详细过程 -vv -vvv更详细
+ --list-hosts 显示主机列表，可简写 --list
+ -k --ask-pass 提示输入ssh连接密码，默认key验证
+ -K  --ask-become-pass 提示输入sudo是的口令
+ -C --check 检查，并不执行
+ -T --timeout=TIMEOUT执行命令的超时时间，默认10s
+ -u --user=REMOTE_USER 执行远程执行的用户
+ -b --become 代替旧版的sudo 切换</code></pre><h6 id="spades-ansible-doc"><a href="#spades-ansible-doc" class="headerlink" title="&spades; ansible-doc"></a>&spades; ansible-doc</h6><pre><code>ansible-doc [options][module...]
+ -a 显示所有模块的文档
+ -l --list 列出可用模块
+ -s --snippet 显示指定模块的playbook片段</code></pre><p>示例：</p>
+<pre><code>ansible-doc -l 列出所有可用模块
+ansible-doc ping 查看ping模块帮助用法
+ansible-doc -s ping 查看ping模块playbook用法帮助</code></pre><h4 id="ansible的host-pattern-pattern-匹配模式"><a href="#ansible的host-pattern-pattern-匹配模式" class="headerlink" title="ansible的host-pattern(pattern 匹配模式)"></a>ansible的host-pattern(pattern 匹配模式)</h4><ul>
+<li><p>逻辑与</p>
+<pre><code>  ansible &quot;webserver:&amp;dbserver&quot; -m ping
+  在webserver组并且在dbserver组中的主机</code></pre></li>
+<li><p>逻辑非</p>
+<pre><code>  ansible &#39;webserver:!dbserver&#39; -m ping
+  在webserver组，但不在dbservser组中的主机
+  ps：此处为单引号</code></pre></li>
+<li><p>综合逻辑</p>
+<pre><code>  ansible &#39;webserver:dbserver:&amp;appserver:!ftpserver&#39; -m ping
+  即在webserver组也在dbserver中，并且在appserver组中，而不在ftpserver中的主机</code></pre></li>
+<li><p>正则表达式</p>
+<pre><code>  ansible &quot;webserver:&amp;dbserver&quot; -m ping
+  ansible &quot;~(web|db).*\xxbk\.cc&quot;</code></pre><h4 id="ansible-密匙认证"><a href="#ansible-密匙认证" class="headerlink" title="ansible 密匙认证"></a>ansible 密匙认证</h4><p>ansible 通过ssh实现配置管理，应用部署，任务执行等功能，建议配置ansible端能基于密匙认证的方式联系各被管理节点</p>
+<pre><code>  [root@localhost ~]# ssh-keygen
+  [root@localhost ~]# for i in {20,30};do ssh-copy-id 192.168.1.$i ;done
+  [root@localhost ~]# for i in {20,30};do ssh 192.168.1.$i hostname; done #验证是否成功
+</code></pre></li>
+</ul>
+<p>```</p>
 
             </div>
             <hr/>
@@ -488,7 +579,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xxbk.cc/2020/03/03/hello-world/">http://xxbk.cc/2020/03/03/hello-world/</a>
+                    <a href="http://xxbk.cc/2020/03/03/Ansible/ansible-1/">http://xxbk.cc/2020/03/03/Ansible/ansible-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -693,22 +784,35 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/03/Ansible/ansible-1/">
+                <a href="/2020/03/03/Ansible/ansible-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ansible部署安装及配置">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="ansible常用模块">
                         
-                        <span class="card-title">ansible部署安装及配置</span>
+                        <span class="card-title">ansible常用模块</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ansible架构图：
-ansible主要模块：
-HostInventory：记录由Ansible管理的主机信息，包括端口、密码、ip等。
-Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中，定义主机需要调用哪些模块来完
+                            目录索引
+ping模块
+command模块
+shell模块
+script模块
+copy模块
+fetch模块
+file模块
+cron模块
+yum模块
+service模块
+user模块
+group模块
+setup模块
+replace模块
+
+ A
                         
                     </div>
                     <div class="publish-info">
@@ -730,7 +834,7 @@ Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中�
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2020/03/03/hello-world/">
@@ -760,7 +864,6 @@ Playbooks：“剧本”YAML格式文件，多个任务定义在一个文件中�
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
